@@ -4,17 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webrtc messaging</title>
+
+    <link rel="text/css" href="css/style.css">
+
+    <title>asynchat - messaging</title>
   </head>
 
   <body>
-    <h1>Send messages peer to peer</h1>
+    <center>
+    <h1>Send a message - asynchat</h1>
 
     <!-- These paragraphs will be initialized when the connection has been established -->
     <p id="yourname"></p>
     <p id="remotename"></p>
 
-    <button id="connectbutton">Connect with peer</button>
+    <button id="connectbutton" onclick="this.style.display = 'none'">Connect</button>
+    <br>
+    <textarea id="messagearea" name="message" rows="5" cols="50"></textarea>
+    <br>
+    <button id="sendmessage">Send</button>
+
+    <div id="messagesent"></div>
 
     <!-- Import SocketIO for signalling -->
     <script src="/socket.io/socket.io.js"></script>
@@ -24,5 +34,95 @@
 
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
+    </center>
   </body>
+
+  <style>
+    body {
+        color:white;
+        background-color: #111111;
+        font-family: Helvetica, Arial, sans-serif;
+        overflow:hidden;
+        scrollbar-color: #2a2a2a #111111;
+    }  
+
+    textarea {
+        color:white;
+        background-color: #2A2A2A;
+        border: inset 1px black;
+        resize: none;
+        height:3vh;
+        font-size: small;
+    }
+
+    button {
+        color: white;
+        background: rgb(45,121,255);
+        /*background: linear-gradient(0deg, rgba(30,104,221,1) 0%, rgba(80,121,255,1) 100%);*/
+        border: outset 1px rgb(25, 101, 235);
+        margin: 8px;
+        padding: 8px 12px 8px 12px;
+        font-size: small;
+        transition-duration: 100ms;
+    }
+
+    button:hover {
+        background: rgb(60,134,251);
+        color: #fdfdfd;
+    }
+
+    button:disabled {
+        opacity: 0.6;
+        border: inset 1px rgb(30, 104, 221);
+        cursor: not-allowed;
+    }
+
+    button:active {
+        background: rgb(30,111,245);
+        border: inset 1px rgb(80, 121, 255);
+    }
+
+    #messagesent {
+        background-color:#1f1f1f;
+        border: inset 1px black;
+        overflow-y:scroll;
+        overflow-x:visible;
+        position:relative;
+        height:60vh;
+        width:65%;
+        text-align: left;
+    }
+
+    .message {
+        padding:8px;
+        margin:8px;
+        background-color:#2a2a2a;
+        border: solid 1px #4a4a4a;
+    }
+
+    #yourname {
+        background-color: #1f1f1f;
+        width: max-content;
+        padding:4px;
+        border: 1px inset black;
+    }
+
+    #remotename {
+        background-color: #1f1f1f;
+        width: max-content;
+        padding:4px;
+        border: 1px inset black;
+    }
+
+    #connectbutton {
+        opacity:1;
+        transition:opacity 1s;
+    }
+
+    #connectbutton:active {
+        opacity:0;
+        visibility: invisible;
+    }
+
+  </style>
 </html>
